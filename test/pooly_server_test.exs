@@ -7,4 +7,10 @@ defmodule Pooly.ServerTest do
 
     assert state == %Pooly.Server.State{}
   end
+
+  test 'init/2 with size' do
+    {:ok, state} = init([size: 5], %Pooly.Server.State{})
+
+    assert state == %Pooly.Server.State{size: 5}
+  end
 end
