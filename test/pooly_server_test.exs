@@ -8,9 +8,10 @@ defmodule Pooly.ServerTest do
     assert state == %Pooly.Server.State{}
   end
 
-  test 'init/2 with size' do
-    {:ok, state} = init([size: 5], %Pooly.Server.State{})
+  test 'init/2 with all configs' do
+    mfa          = {SampleWorker, :start_link, []}
+    {:ok, state} = init([size: 5, mfa: mfa, sup: 5], %Pooly.Server.State{})
 
-    assert state == %Pooly.Server.State{size: 5}
+    assert state == %Pooly.Server.State{size: 5, mfa: mfa, sup: 5}
   end
 end
