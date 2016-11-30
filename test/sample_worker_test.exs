@@ -2,16 +2,19 @@ defmodule SampleWorkerTest do
   use ExUnit.Case
   import SampleWorker, only: [start_link: 1]
 
-  test 'start_link' do
+  setup do
     {:ok, pid} = start_link([])
 
-    assert pid != nil
+    {:ok, pid: pid}
   end
 
-  test 'stop' do
-    {:ok, pid} = start_link([])
+  test 'start_link', state do
+    assert state[:pid] != nil
+  end
 
-    SampleWorker.stop(pid)
-    assert Process.alive?(pid) == false
+  test 'stop', state do
+    SampleWorker.stop(state[:pid])
+
+    assert Process.alive?(state[:pid]) == false
   end
 end
