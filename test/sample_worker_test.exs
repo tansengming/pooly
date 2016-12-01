@@ -1,6 +1,6 @@
 defmodule SampleWorkerTest do
   use ExUnit.Case
-  import SampleWorker, only: [start_link: 1]
+  import SampleWorker, only: [start_link: 1, stop: 1]
 
   setup do
     {:ok, pid} = start_link([])
@@ -13,7 +13,7 @@ defmodule SampleWorkerTest do
   end
 
   test 'stop', state do
-    SampleWorker.stop(state[:pid])
+    stop(state[:pid])
 
     assert Process.alive?(state[:pid]) == false
   end
